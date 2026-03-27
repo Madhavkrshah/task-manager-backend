@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-export const authMiddleware = function (req, res, next) {
+const authMiddleware = function (req, res, next) {
   try {
     // Extract token from Authorization header
     // console.log(req.headers)
@@ -46,14 +46,16 @@ export const authMiddleware = function (req, res, next) {
       });
     }
 
-    if(error.name === 'TokenExpiredError'){
-        return res.status(401).json({
-            message: 'Token has expired.'
-        })
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        message: "Token has expired.",
+      });
     }
 
     return res.status(500).json({
-        message: 'Server error during authentication.'
-    })
+      message: "Server error during authentication.",
+    });
   }
 };
+
+module.exports = authMiddleware;
