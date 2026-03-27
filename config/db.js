@@ -1,9 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-const dbUrl =
-  process.env.MONGO_URI ||
-  "mongodb+srv://task_manager:a7omH88hz4QW1Nis@cluster0.7tjtunz.mongodb.net/";
+const dbUrl = process.env.MONGO_URI;
 
 async function connectDB() {
   try {
@@ -14,4 +12,4 @@ async function connectDB() {
   }
 }
 
-module.export = { connectDB };
+module.exports = connectDB;
