@@ -5,10 +5,10 @@ const User = require("../models/User");
 // Register a new user
 const register = async function (req, res) {
   try {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     // Validate input
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "Please provide all required fields",
@@ -30,7 +30,7 @@ const register = async function (req, res) {
 
     // Create new user
     const newUser = await User.create({
-      name,
+      username,
       email,
       password: hashedPassword,
     });
@@ -48,12 +48,12 @@ const register = async function (req, res) {
 
     // response with token
     res.status(201).json({
-      success: false,
+      success: true,
       message: "User registered successfully",
       token,
       user: {
         id: newUser._id,
-        name: newUser.name,
+        name: newUser.username,
         email: newUser.email,
       },
     });
@@ -82,7 +82,7 @@ const login = async function (req, res) {
 
     // find user by email
     const user = await User.findOne({ email });
-    if (!User) {
+    if (!user) {
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
@@ -92,7 +92,7 @@ const login = async function (req, res) {
     // compare password with bcrypt.compare()
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.json({
+      return res.status(401).json({
         success: false,
         message: "Invalid email or password",
       });
@@ -116,13 +116,13 @@ const login = async function (req, res) {
       token,
       user: {
         id: user._id,
-        name: user.name,
+        name: user.username,
         email: user.email,
       },
     });
   } catch (error) {
     console.error("Login Error:", error);
-    res.json({
+    res.status(500).json({
       success: false,
       message: "Server error during login",
       error: error.message,
@@ -134,3 +134,11 @@ module.exports = {
   register,
   login,
 };
+
+/*
+
+
+fix(authController): fix multiple bugs in authController" -m "- fixed success field returning false on successful registration.
+- fixed if(!User) to if(!user) in login route
+- added missing 401 and 500 status codes for invalid password and server error"
+ */
