@@ -11,9 +11,11 @@ const getTasks = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ success: false, message: "Server error", error: error });
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };
+
+// fix: for to write .message on Server error;
 
 // Get single task by ID
 // GET /api/tasks/:id
@@ -151,3 +153,5 @@ module.exports = {
   updateTask,
   deleteTask,
 };
+
+// git commit -m 'fix(taskController): fix missing .message on server error in getTasks' -m '- was passing full error object instead of error.message in getTasks error handler'
