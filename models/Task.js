@@ -39,4 +39,3 @@ const Task = mongoose.model("Task", taskSchema);
 
 module.exports = Task;
 
-// fix two bugs 1. export to exports, 2. {Task} to Task.
