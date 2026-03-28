@@ -17,10 +17,12 @@ const taskSchema = new mongoose.Schema(
       trim: true,
     },
     status: {
+      type: String,
       enum: ["pending", "completed"],
       default: "pending",
     },
     priority: {
+      type: String,
       enum: ["low", "medium", "high"],
       default: "medium",
     },
@@ -35,4 +37,6 @@ const taskSchema = new mongoose.Schema(
 
 const Task = mongoose.model("Task", taskSchema);
 
-module.export = { Task };
+module.exports = Task;
+
+// fix two bugs 1. export to exports, 2. {Task} to Task.
