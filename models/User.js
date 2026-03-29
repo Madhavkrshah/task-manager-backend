@@ -30,4 +30,4 @@ const User = mongoose.model("User", userSchema);
 
 module.exports = User;
 
-// fix two bugs 1. export to exports, 2. {User} to User.
+
