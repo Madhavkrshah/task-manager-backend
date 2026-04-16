@@ -136,15 +136,7 @@ const deleteTask = async (req, res) => {
   }
 };
 
-/*
-feat(tasks): implement task controller with full CRUD operations
 
-- getTasks: fetch all tasks for authenticated user
-- getTaskById: fetch single task with ownership check
-- createTask: create task linked to authenticated user
-- updateTask: update task with ownership verification
-- deleteTask: delete task with ownership verification
-*/
 
 module.exports = {
   getTasks,
@@ -153,5 +145,3 @@ module.exports = {
   updateTask,
   deleteTask,
 };
-
-// git commit -m 'fix(taskController): fix missing .message on server error in getTasks' -m '- was passing full error object instead of error.message in getTasks error handler'

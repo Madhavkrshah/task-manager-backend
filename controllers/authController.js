@@ -134,11 +134,3 @@ module.exports = {
   register,
   login,
 };
-
-/*
-
-
-fix(authController): fix multiple bugs in authController" -m "- fixed success field returning false on successful registration.
-- fixed if(!User) to if(!user) in login route
-- added missing 401 and 500 status codes for invalid password and server error"
- */
